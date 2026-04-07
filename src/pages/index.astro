@@ -1,287 +1,365 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import ProjectCard from '../components/ui/ProjectCard.astro';
+import StatCard from '../components/ui/StatCard.astro';
+import AvailableBadge from '../components/ui/AvailableBadge.astro';
+import Tag from '../components/ui/Tag.astro';
+import Footer from '../components/Footer.astro';
 
-const projetos = [
-  {
-    type: 'BOT . PYTHON',
-    title: 'Bot Trader',
-    description: '17 versoes de estrategias quantitativas. Deploy containerizado, paper trading 24/7 na Kraken.',
-    tags: ['PYTHON', 'FREQTRADE', 'DOCKER', 'TA-LIB'],
-    repo: 'https://github.com/caiom21/bot-trader'
-  },
-  {
-    type: 'WEB . REACT',
-    title: 'Ponto Cruz E-commerce',
-    description: 'Loja de artesanatos e bordados com foco em performance e acessibilidade.',
-    tags: ['REACT', 'NODE.JS', 'TAILWIND'],
-    repo: 'https://github.com/caiom21/ponto-cruz-ecommerce'
-  }
-];
-
-const stack = [
-  'REACT', 'TYPESCRIPT', 'NODE.JS', 'NEXT.JS',
-  'VUE.JS', 'PYTHON', 'DOCKER', 'FIGMA',
-  'N8N', 'POSTGRESQL', 'TAILWIND', 'REACT NATIVE',
-];
-
-const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/caiom21', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.36 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.36 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/caio-miranda-246603374', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>' },
-  { name: 'Instagram', href: 'https://www.instagram.com/caio.dev.pe/', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>' },
-];
+import { projects } from '../data/projects';
+import { stats } from '../data/stats';
+import { stackCategories } from '../data/stack';
+import { socialLinks, contactInfo } from '../data/social';
 
 const experiencia = [
   {
-    role: 'Consultor Tecnico de Vendas',
+    role: 'Consultor Técnico de Vendas',
     company: 'OS Sistemas',
-    period: 'Out 2024 - Presente',
-    tags: ['SUPORTE TECNICO', 'LEVANTAMENTO DE REQUISITOS', 'GESTAO DE EQUIPE', 'SLA'],
-    desc: 'Suporte tecnico a clientes, levantamento de requisitos para correcoes e melhorias na plataforma de gestao escolar. Acompanhamento de metricas com ferramentas como Hotjar e Google Analytics. Assistencia na gestao de equipe e treinamentos.'
+    period: 'Out 2024 – Presente',
+    tags: ['SUPORTE TÉCNICO', 'REQUISITOS', 'GESTÃO DE EQUIPE', 'SLA'],
+    desc: 'Suporte técnico a clientes, levantamento de requisitos para correções e melhorias na plataforma de gestão escolar. Acompanhamento de métricas com Hotjar e Google Analytics.'
   },
   {
     role: 'Gerente',
-    company: 'Otica Fatima',
-    period: '2022 - 2024',
-    tags: ['GESTAO COMERCIAL', 'VENDAS B2B', 'RELACIONAMENTO'],
-    desc: 'Gestao comercial, estrategias de vendas, fortalecimento de relacionamento com fornecedores e clientes B2B.'
+    company: 'Ótica Fátima',
+    period: '2022 – 2024',
+    tags: ['GESTÃO COMERCIAL', 'VENDAS B2B', 'RELACIONAMENTO'],
+    desc: 'Gestão comercial, estratégias de vendas, fortalecimento de relacionamento com fornecedores e clientes B2B.'
   }
 ];
 
 const formacao = [
-  {
-    title: 'Ciencia da Computacao',
-    school: 'UNICA',
-    period: '6o Periodo',
-    icon: '🎓'
-  },
-  {
-    title: 'Tecnico em Informatica',
-    school: 'EBTTA',
-    period: 'Concluido',
-    icon: '📋'
-  },
-  {
-    title: 'Engenharia de Front-end',
-    school: 'Origamid',
-    period: 'Certificacao',
-    icon: '⚛️'
-  },
-  {
-    title: 'UI/UX Design',
-    school: 'Origamid',
-    period: 'Certificacao',
-    icon: '🎨'
-  }
-];
-
-const stats = [
-  { value: '2+', label: 'Anos de Experiencia' },
-  { value: '15+', label: 'Projetos Concluidos' },
-  { value: '12+', label: 'Tecnologias' },
-  { value: '6o', label: 'Periodo Ci. Computacao' },
+  { title: 'Ciência da Computação', school: 'UNICA', period: '6º Período', icon: '🎓' },
+  { title: 'Técnico em Informática', school: 'EBTTA', period: 'Concluído', icon: '📋' },
+  { title: 'Engenharia de Front-end', school: 'Origamid', period: 'Certificação', icon: '⚛️' },
+  { title: 'UI/UX Design', school: 'Origamid', period: 'Certificação', icon: '🎨' },
 ];
 ---
 
-<Layout title="Caio Miranda | Desenvolvedor de Software">
+<Layout title="Caio Miranda — Desenvolvedor Full-Stack">
 
-  <!-- ====== HERO ====== -->
-  <section class="relative w-full min-h-[100vh] flex items-center">
+  <!-- ═══════ ATO 1 — HERO ═══════ -->
+  <section id="inicio" class="relative min-h-screen flex flex-col justify-center px-6 pt-24 pb-20 overflow-hidden">
     <div class="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
-    <div class="container mx-auto px-4 relative z-10">
-      <div class="grid md:grid-cols-[1fr_auto] gap-12 items-center">
 
-        <div class="max-w-3xl">
-          <!-- Terminal intro -->
-          <div class="mb-8 inline-block font-mono text-xs leading-relaxed hero-terminal">
-            <span class="text-accent">&gt;</span> <span class="text-text/60">iniciar apresentacao()</span><br/>
-            <span class="text-accent">&gt;</span> <span class="text-text typing-line" id="typewriter"></span><span class="animate-blink inline-block w-2 h-4 bg-accent align-middle ml-0.5" id="cursor-blink"></span>
-          </div>
+    <div class="relative z-10 max-w-[1100px] mx-auto w-full">
 
-          <h1 class="text-5xl sm:text-6xl md:text-8xl font-sans font-bold leading-[0.9] tracking-tight text-text hero-name">
-            Caio<br/><span class="text-accent">Miranda</span>
-          </h1>
+      <!-- Label + Available badge -->
+      <div class="flex items-center justify-between mb-8 flex-wrap gap-4 hero-label opacity-0">
+        <span class="font-mono text-[11px] uppercase tracking-[0.2em] text-text-secondary">
+          Full-Stack Developer
+        </span>
+        <AvailableBadge />
+      </div>
 
-          <p class="mt-6 text-sm font-mono text-text/60 leading-relaxed max-w-xl hero-desc">
-            Desenvolvedor de Software com foco em desenvolvimento web full-stack, automacao, integracao de sistemas e inteligencia artificial. Ciencia da Computacao, 6o periodo.
-          </p>
+      <!-- Terminal intro -->
+      <div class="mb-6 inline-block font-mono text-xs leading-relaxed hero-terminal opacity-0">
+        <span class="text-accent">&gt;</span> <span class="text-text/60">iniciar apresentacao()</span><br/>
+        <span class="text-accent">&gt;</span> <span class="text-text" id="typewriter"></span><span class="animate-blink inline-block w-2 h-4 bg-accent align-middle ml-0.5" id="cursor-blink"></span>
+      </div>
 
-          <!-- Contact pills -->
-          <div class="flex flex-wrap gap-3 mt-6 hero-contact">
-            <a href="mailto:caiom2a@gmail.com" class="inline-flex items-center gap-2 px-3 py-1.5 border border-accent/30 text-[11px] font-mono text-accent hover:bg-accent/10 transition-colors rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-              caiom2a@gmail.com
-            </a>
-            <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-text/15 text-[11px] font-mono text-text/50 rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              +55 87 9 8811-9519
-            </span>
-            <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-text/15 text-[11px] font-mono text-text/50 rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              Bezerros, PE
-            </span>
-          </div>
+      <!-- H1 -->
+      <div class="mb-8">
+        <h1
+          class="font-display font-extrabold leading-[0.92] tracking-[-0.03em] text-text hero-name opacity-0"
+          style="font-size: clamp(64px, 10vw, 112px);"
+        >
+          Caio
+        </h1>
+        <h1
+          class="font-display font-extrabold leading-[0.92] tracking-[-0.03em] text-accent hero-name-accent opacity-0"
+          style="font-size: clamp(64px, 10vw, 112px);"
+        >
+          Miranda
+        </h1>
+      </div>
 
-          <!-- Social + CTAs -->
-          <div class="flex flex-col sm:flex-row items-start gap-6 mt-10 hero-actions">
-            <div class="flex gap-3">
-              {socialLinks.map(social => (
-                <a href={social.href} target="_blank" rel="noopener noreferrer"
-                   class="w-10 h-10 flex items-center justify-center border border-text/20 text-text/50 hover:border-accent hover:text-accent transition-all hover:scale-110"
-                   aria-label={social.name}
-                   set:html={social.svg} />
-              ))}
-            </div>
-            <div class="flex gap-3">
-              <a href="#projetos" class="px-6 py-3 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors font-mono text-sm uppercase">Ver Projetos</a>
-              <a href="/contato" class="px-6 py-3 border border-text/20 text-text/80 hover:border-text hover:text-text transition-colors font-mono text-sm uppercase">Contato</a>
-            </div>
-          </div>
+      <!-- Stack line -->
+      <p class="font-mono text-[14px] text-text-secondary mb-2 tracking-wide hero-stack opacity-0">
+        React · Node.js · TypeScript · IA &amp; Automação
+      </p>
+
+      <!-- Location -->
+      <p class="font-mono text-[13px] text-text-muted mb-10 hero-location opacity-0">
+        {contactInfo.location} — disponível para remoto
+      </p>
+
+      <!-- Contact pills -->
+      <div class="flex flex-wrap gap-3 mb-8 hero-contact opacity-0">
+        <a href={`mailto:${contactInfo.email}`} class="inline-flex items-center gap-2 px-3 py-1.5 border border-accent/30 text-[11px] font-mono text-accent hover:bg-accent/10 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          {contactInfo.email}
+        </a>
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-[11px] font-mono text-text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {contactInfo.phone}
+        </span>
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-border text-[11px] font-mono text-text-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          {contactInfo.location}
+        </span>
+      </div>
+
+      <!-- CTAs + Social -->
+      <div class="flex flex-col sm:flex-row items-start gap-6 hero-actions opacity-0">
+        <div class="flex gap-3">
+          {socialLinks.map(social => (
+            <a href={social.href} target="_blank" rel="noopener noreferrer"
+               class="w-10 h-10 flex items-center justify-center border border-border text-text-muted hover:border-accent hover:text-accent transition-all duration-150 hover:scale-110"
+               aria-label={social.name}
+               set:html={social.svg} />
+          ))}
         </div>
-
-        <!-- Photo -->
-        <div class="hidden md:flex-shrink-0">
-          <div class="w-72 h-72 relative group border border-accent/20 hover:border-accent transition-colors overflow-hidden">
-            <div class="card-corner z-20"></div>
-            <img src="/fotoPerfil.jpg" alt="Caio Miranda" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 z-10 relative" loading="eager" />
-          </div>
+        <div class="flex gap-3">
+          <a href="#projetos" class="px-6 py-3 bg-accent text-bg font-mono text-[11px] uppercase tracking-[0.12em] hover:bg-accent-hover transition-colors duration-150 flex items-center gap-2">
+            Ver Projetos
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="/contato" class="px-6 py-3 border border-border text-text-secondary hover:border-border-bright hover:text-text font-mono text-[11px] uppercase tracking-[0.12em] transition-all duration-150">
+            Contato
+          </a>
         </div>
       </div>
     </div>
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-indicator opacity-0">
-      <span class="text-[10px] font-mono tracking-widest text-text/30 uppercase">Scroll</span>
+      <span class="text-[10px] font-mono tracking-[0.2em] text-text-muted uppercase">scroll</span>
       <div class="w-px h-8 bg-gradient-to-b from-accent/60 to-transparent"></div>
     </div>
   </section>
 
-  <!-- ====== STATS ====== -->
-  <section class="border-y border-accent/20 bg-surface">
-    <div class="container mx-auto px-4 py-16">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 stats-grid">
-        {stats.map(stat => (
-          <div class="text-center reveal">
-            <div class="text-3xl md:text-4xl font-bold text-accent stat-value" data-value={stat.value}>{stat.value}</div>
-            <div class="text-[11px] font-mono tracking-widest text-text/40 mt-2 uppercase">{stat.label}</div>
-          </div>
+  <!-- ═══════ ATO 2 — STATS ═══════ -->
+  <section class="border-y border-border">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-px bg-border">
+        {stats.map((stat, i) => (
+          <StatCard stat={stat} index={i} />
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ====== SOBRE ====== -->
-  <section class="container mx-auto px-4 py-24 border-b border-accent/20">
-    <div class="grid md:grid-cols-[auto_1fr] gap-16 items-start">
-      <div class="hidden md:block">
-        <h2 class="text-xs font-mono tracking-widest text-accent uppercase mb-2 sticky top-24">Sobre</h2>
+  <!-- ═══════ ATO 3 — PROJETOS ═══════ -->
+  <section id="projetos" class="py-24 px-6 border-b border-border">
+    <div class="max-w-[1100px] mx-auto">
+      <SectionLabel label="Projetos em destaque" />
+
+      <!-- Category filters -->
+      <div class="flex flex-wrap gap-2 mb-10" id="project-filters">
+        <button data-filter="all" class="filter-btn font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 border border-accent bg-accent text-bg transition-all duration-150 cursor-pointer">
+          TODOS
+        </button>
+        <button data-filter="web" class="filter-btn font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 border border-border text-text-secondary hover:border-border-bright transition-all duration-150 cursor-pointer">
+          WEB
+        </button>
+        <button data-filter="mobile" class="filter-btn font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 border border-border text-text-secondary hover:border-border-bright transition-all duration-150 cursor-pointer">
+          MOBILE
+        </button>
+        <button data-filter="automation" class="filter-btn font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 border border-border text-text-secondary hover:border-border-bright transition-all duration-150 cursor-pointer">
+          AUTOMAÇÃO
+        </button>
+        <button data-filter="data" class="filter-btn font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 border border-border text-text-secondary hover:border-border-bright transition-all duration-150 cursor-pointer">
+          DATA
+        </button>
       </div>
-      <div class="reveal">
-        <p class="text-base font-mono text-text/70 leading-relaxed max-w-3xl">
-          Desenvolvedor de Software com experiencia em projetos que combinam eficiencia, comunicacao e inteligencia artificial. Atuante em suporte tecnico, levantamento de requisitos, gestao de equipe e acompanhamento de metricas. Sempre priorizando resultados mensuraveis e impacto nos negocios.
-        </p>
-        <div class="flex flex-wrap gap-2 mt-8">
-          {stack.map(tech => (
-            <span class="px-3 py-1.5 border border-accent/20 bg-accent/5 text-[10px] font-mono tracking-wider text-text/50 hover:text-accent hover:border-accent transition-all reveal">{tech}</span>
+
+      <!-- Project cards grid -->
+      <div class="grid md:grid-cols-2 gap-4" id="projects-grid">
+        {projects.map((project) => (
+          <div data-category={project.category}>
+            <ProjectCard project={project} />
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/projetos" class="font-mono text-[11px] uppercase tracking-[0.15em] text-text-muted hover:text-accent transition-colors">
+          Ver todos os projetos &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ATO 4 — STACK ═══════ -->
+  <section id="stack" class="py-24 px-6 border-b border-border">
+    <div class="max-w-[1100px] mx-auto">
+      <SectionLabel label="Stack técnico" />
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap gap-2 mb-10" id="stack-tabs">
+        {stackCategories.map((cat, i) => (
+          <button
+            data-stack-tab={cat.id}
+            class:list={[
+              "stack-tab font-mono text-[11px] uppercase tracking-[0.12em] px-3 py-1.5 border transition-all duration-150 cursor-pointer",
+              i === 0
+                ? "border-accent bg-accent text-bg"
+                : "border-border text-text-secondary hover:border-border-bright"
+            ]}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Stack content panels -->
+      {stackCategories.map((cat, i) => (
+        <div
+          data-stack-panel={cat.id}
+          class:list={[
+            "stack-panel flex flex-wrap gap-3 transition-opacity duration-200",
+            i === 0 ? "" : "hidden"
+          ]}
+        >
+          {cat.items.map(item => (
+            <span class="px-4 py-2.5 border border-border bg-surface text-[12px] font-mono tracking-wider text-text-secondary hover:text-accent hover:border-accent transition-all duration-150">
+              {item}
+            </span>
           ))}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══════ ATO 5 — SOBRE ═══════ -->
+  <section id="sobre" class="py-24 px-6 border-b border-border">
+    <div class="max-w-[1100px] mx-auto">
+      <SectionLabel label="Sobre" />
+
+      <div class="grid md:grid-cols-2 gap-16">
+        <!-- Bio -->
+        <div class="reveal">
+          <p class="text-[15px] font-sans leading-[1.7] text-text-secondary mb-6">
+            Desenvolvedor full-stack construindo produtos reais desde 2024. Não faço curso e guardo na gaveta — cada projeto aqui foi ao ar, foi usado, foi iterado.
+          </p>
+          <p class="text-[15px] font-sans leading-[1.7] text-text-secondary mb-8">
+            Meu diferencial: consigo transitar entre front-end, back-end, mobile e automação com IA. Aprendo rápido, entrego código limpo e prefiro um time que me desafie.
+          </p>
+
+          <!-- Languages -->
+          <div class="flex gap-4">
+            <span class="px-3 py-1.5 border border-border text-[11px] font-mono text-text-secondary">🇧🇷 Português nativo</span>
+            <span class="px-3 py-1.5 border border-border text-[11px] font-mono text-text-secondary">🇺🇸 Inglês B2</span>
+          </div>
+        </div>
+
+        <!-- Right: Experience + Education -->
+        <div class="space-y-8">
+          <!-- Experience timeline -->
+          <div>
+            <h3 class="font-mono text-[11px] uppercase tracking-[0.15em] text-accent mb-6">Experiência</h3>
+            <div class="space-y-0">
+              {experiencia.map((exp, i) => (
+                <div class={`reveal relative border-l-2 border-border pl-8 pb-8 last:pb-0`}>
+                  <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-accent timeline-dot"></div>
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                    <h4 class="text-sm font-sans font-semibold text-text">{exp.role}</h4>
+                    <span class="text-[10px] font-mono tracking-wider text-accent bg-accent/10 px-2 py-0.5">{exp.period}</span>
+                  </div>
+                  <p class="text-[11px] font-mono text-text-muted mb-3">{exp.company}</p>
+                  <p class="text-[13px] font-sans text-text-secondary leading-relaxed mb-3">{exp.desc}</p>
+                  <div class="flex flex-wrap gap-1.5">
+                    {exp.tags.map(tag => (
+                      <span class="px-2 py-0.5 border border-border text-accent text-[9px] font-mono tracking-wider">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div>
+            <h3 class="font-mono text-[11px] uppercase tracking-[0.15em] text-accent mb-6">Formação</h3>
+            <div class="grid grid-cols-2 gap-3">
+              {formacao.map(f => (
+                <div class="border border-border bg-surface p-4 group hover:border-accent transition-colors reveal">
+                  <div class="text-xl mb-2">{f.icon}</div>
+                  <h4 class="text-[13px] font-sans font-semibold text-text mb-1">{f.title}</h4>
+                  <p class="text-[10px] font-mono text-text-muted">{f.school} · {f.period}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ====== EXPERIENCIA ====== -->
-  <section class="container mx-auto px-4 py-24 border-b border-accent/20">
-    <div class="grid md:grid-cols-[auto_1fr] gap-16 items-start">
-      <div class="hidden md:block">
-        <h2 class="text-xs font-mono tracking-widest text-accent uppercase mb-2 sticky top-24">Experiencia</h2>
-      </div>
-      <div class="space-y-0">
-        {experiencia.map((exp, i) => (
-          <div class={`reveal relative border-l-2 border-accent/20 pl-8 pb-12 last:pb-0 ${i === 0 ? '' : 'mt-4'}`}>
-            <div class="absolute -left-[5px] top-0 w-2.5 h-2.5 rounded-full bg-accent timeline-dot"></div>
-            <div class="bg-surface border border-accent/10 p-8 group hover:border-accent/40 transition-colors">
-              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
-                <h3 class="text-lg font-bold text-text">{exp.role}</h3>
-                <span class="text-[10px] font-mono tracking-wider text-accent bg-accent/10 px-2 py-0.5">{exp.period}</span>
-              </div>
-              <p class="text-xs font-mono text-text/50 mb-4">{exp.company}</p>
-              <p class="text-sm font-mono text-text/60 leading-relaxed mb-4">{exp.desc}</p>
-              <div class="flex flex-wrap gap-2">
-                {exp.tags.map(tag => (
-                  <span class="px-2 py-0.5 border border-accent/20 text-accent text-[9px] font-mono tracking-wider">{tag}</span>
-                ))}
-              </div>
-            </div>
+  <!-- ═══════ ATO 6 — CONTATO ═══════ -->
+  <section id="contato" class="py-24 px-6 border-b border-border">
+    <div class="max-w-[1100px] mx-auto">
+      <SectionLabel label="Contato" />
+
+      <div class="grid md:grid-cols-2 gap-16">
+        <!-- Left: headline -->
+        <div class="reveal">
+          <h2
+            class="font-display font-extrabold text-text mb-4"
+            style="font-size: clamp(36px, 5vw, 56px); line-height: 1; letter-spacing: -0.02em;"
+          >
+            Vamos construir<br/>
+            <span class="text-accent">algo juntos.</span>
+          </h2>
+          <p class="text-[15px] font-sans leading-relaxed text-text-secondary mb-8">
+            Aberto para posições remotas como desenvolvedor full-stack. Respondo em até 24 horas.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href={`mailto:${contactInfo.email}`} class="px-6 py-3 bg-accent text-bg font-mono text-[11px] uppercase tracking-[0.12em] hover:bg-accent-hover transition-colors duration-150">
+              Enviar mensagem
+            </a>
+            <a href="/contato" class="px-6 py-3 border border-border text-text-secondary hover:border-border-bright hover:text-text font-mono text-[11px] uppercase tracking-[0.12em] transition-all duration-150">
+              Formulário
+            </a>
           </div>
-        ))}
+        </div>
+
+        <!-- Right: contact links -->
+        <div class="flex flex-col gap-1 reveal">
+          <a
+            href={`mailto:${contactInfo.email}`}
+            class="flex items-center gap-4 p-4 border border-transparent hover:border-border hover:bg-surface transition-all duration-150 group"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span class="font-mono text-[13px] text-text-secondary group-hover:text-text transition-colors">{contactInfo.email}</span>
+          </a>
+          <a
+            href="https://github.com/caiom21"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 p-4 border border-transparent hover:border-border hover:bg-surface transition-all duration-150 group"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.36 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.36 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            <span class="font-mono text-[13px] text-text-secondary group-hover:text-text transition-colors">github.com/caiom21</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/caio-miranda-246603374"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 p-4 border border-transparent hover:border-border hover:bg-surface transition-all duration-150 group"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            <span class="font-mono text-[13px] text-text-secondary group-hover:text-text transition-colors">linkedin.com/in/caio-miranda</span>
+          </a>
+          <a
+            href={contactInfo.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 p-4 border border-transparent hover:border-border hover:bg-surface transition-all duration-150 group"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span class="font-mono text-[13px] text-text-secondary group-hover:text-text transition-colors">{contactInfo.phone}</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ====== FORMACAO ====== -->
-  <section class="container mx-auto px-4 py-24 border-b border-accent/20">
-    <div class="grid md:grid-cols-[auto_1fr] gap-16 items-start">
-      <div class="hidden md:block">
-        <h2 class="text-xs font-mono tracking-widest text-accent uppercase mb-2 sticky top-24">Formacao</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {formacao.map(f => (
-          <div class="border border-accent/15 bg-surface p-6 group hover:border-accent/40 transition-all reveal">
-            <div class="text-2xl mb-3">{f.icon}</div>
-            <h3 class="text-sm font-bold text-text mb-1">{f.title}</h3>
-            <p class="text-[11px] font-mono text-text/50">{f.school} · {f.period}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Footer />
 
-  <!-- ====== PROJETOS ====== -->
-  <section id="projetos" class="container mx-auto px-4 py-24 border-b border-accent/20">
-    <div class="flex items-end justify-between mb-12">
-      <div>
-        <h2 class="text-xs font-mono tracking-widest text-accent uppercase mb-2">Projetos em destaque</h2>
-        <p class="text-sm font-mono text-text/40">Trabalhos recentes e relevantes.</p>
-      </div>
-      <a href="/projetos" class="hidden md:block text-xs font-mono tracking-widest text-accent/60 hover:text-accent transition-colors">Ver todos &rarr;</a>
-    </div>
-    <div class="grid md:grid-cols-2 gap-6">
-      {projetos.map(proj => (
-        <a href={proj.repo} target="_blank" class="relative bg-surface border border-accent/20 p-8 group hover:border-accent transition-colors reveal block">
-          <div class="card-corner opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="text-[10px] font-mono tracking-widest text-text/40 mb-3 uppercase">{proj.type}</div>
-          <h3 class="text-xl font-bold mb-3 text-text">{proj.title}</h3>
-          <p class="text-sm font-mono text-text/60 mb-6">{proj.description}</p>
-          <div class="flex flex-wrap gap-2 mb-6">
-            {proj.tags.map(tag => (
-              <span class="px-2 py-1 border border-accent/30 text-accent text-[10px] font-mono tracking-wider">{tag}</span>
-            ))}
-          </div>
-          <span class="text-xs font-mono tracking-widest text-accent/50 group-hover:text-accent transition-colors">CODIGO-FONTE &rarr;</span>
-        </a>
-      ))}
-    </div>
-    <div class="md:hidden mt-6 text-center">
-      <a href="/projetos" class="text-xs font-mono tracking-widest text-accent/60 hover:text-accent transition-colors">Ver todos os projetos &rarr;</a>
-    </div>
-  </section>
-
-  <!-- ====== FOOTER ====== -->
-  <footer class="container mx-auto px-4 py-12">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="text-center md:text-left">
-        <p class="text-xs font-mono text-text/40">&copy; 2026 Caio Miranda. Todos os direitos reservados.</p>
-      </div>
-      <div class="flex items-center gap-4">
-        {socialLinks.map(social => (
-          <a href={social.href} target="_blank" rel="noopener noreferrer"
-             class="w-8 h-8 flex items-center justify-center text-text/30 hover:text-accent transition-colors"
-             aria-label={social.name}
-             set:html={social.svg} />
-        ))}
-      </div>
-    </div>
-  </footer>
-
+  <!-- ═══════ ANIMATIONS ═══════ -->
   <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -289,57 +367,80 @@ const stats = [
     document.addEventListener('astro:page-load', () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Typewriter effect
+      // ── Typewriter ────────────
       const text = 'Caio Miranda, desenvolvedor full-stack.';
       const el = document.getElementById('typewriter');
       const cursor = document.getElementById('cursor-blink');
-      let i = 0;
-      function type() {
-        if (i < text.length) {
-          el.textContent += text.charAt(i);
-          i++;
-          setTimeout(type, 40 + Math.random() * 40);
-        } else {
-          // Remove cursor blink after typing done
-          setTimeout(() => {
-            if (cursor) cursor.style.animation = 'none';
-          }, 2000);
+      if (el) {
+        let i = 0;
+        function type() {
+          if (i < text.length) {
+            el!.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 40 + Math.random() * 40);
+          } else {
+            setTimeout(() => {
+              if (cursor) cursor.style.animation = 'none';
+            }, 2000);
+          }
         }
-      }
-      setTimeout(type, 800);
-      if (cursor) {
-        const sheet = document.styleSheets[0];
-        sheet.insertRule(`@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}`, 0);
-        cursor.style.animation = 'blink 0.7s step-end infinite';
+        setTimeout(type, 800);
       }
 
-      // Hero entrance
-      gsap.fromTo('.hero-name', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.1 });
-      gsap.fromTo('.hero-terminal', { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" });
+      // ── Hero staggered entrance ────────────
+      const heroTimeline = gsap.timeline({ defaults: { ease: "power3.out" } });
+      heroTimeline
+        .to('.hero-label',        { opacity: 1, y: 0, duration: 0.5 }, 0)
+        .to('.hero-terminal',     { opacity: 1, x: 0, duration: 0.6 }, 0)
+        .to('.hero-name',         { opacity: 1, y: 0, duration: 0.8 }, 0.1)
+        .to('.hero-name-accent',  { opacity: 1, y: 0, duration: 0.8 }, 0.2)
+        .to('.hero-stack',        { opacity: 1, y: 0, duration: 0.5 }, 0.3)
+        .to('.hero-location',     { opacity: 1, y: 0, duration: 0.5 }, 0.35)
+        .to('.hero-contact',      { opacity: 1, y: 0, duration: 0.5 }, 0.4)
+        .to('.hero-actions',      { opacity: 1, y: 0, duration: 0.6 }, 0.5)
+        .to('.scroll-indicator',  { opacity: 1, duration: 0.5 }, 1);
 
-      const contactEls = document.querySelectorAll('.hero-contact');
-      if (contactEls.length) {
-        gsap.fromTo(contactEls, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", delay: 1.8 });
-      }
+      // Set initial states for hero animations
+      gsap.set(['.hero-label', '.hero-name', '.hero-name-accent', '.hero-stack', '.hero-location', '.hero-contact', '.hero-actions'], { y: 20 });
+      gsap.set('.hero-terminal', { x: -20 });
 
-      gsap.fromTo('.hero-actions',
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out", delay: 2 }
-      );
+      // Scroll indicator bounce
+      gsap.to('.scroll-indicator > div', {
+        height: 0, opacity: 0,
+        duration: 1.5, repeat: -1, yoyo: true,
+        ease: "power1.inOut"
+      });
 
-      gsap.fromTo('.hero-desc',
-        { opacity: 0, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", delay: 1.5 }
-      );
+      // ── Animated Counters ────────────
+      const statNumbers = document.querySelectorAll('.stat-number');
+      statNumbers.forEach((el) => {
+        const target = parseInt(el.getAttribute('data-target') || '0');
+        const suffix = el.getAttribute('data-suffix') || '';
+        const prefix = el.getAttribute('data-prefix') || '';
+        const display = el.querySelector('.stat-display') as HTMLElement;
 
-      // Scroll indicator
-      gsap.to('.scroll-indicator', { opacity: 1, duration: 0.5, delay: 2.5 });
-      gsap.to('.scroll-indicator > div', { height: 0, opacity: 0, duration: 1.5, repeat: -1, yoyo: true, ease: "power1.inOut" });
+        if (!display) return;
 
-      // Photo entrance
-      gsap.fromTo('.hero-photo', { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 1, ease: "power2.out", delay: 0.3 });
+        const observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            observer.disconnect();
 
-      // Reveal on scroll
+            const obj = { val: 0 };
+            gsap.to(obj, {
+              val: target,
+              duration: 1.5,
+              ease: "power2.out",
+              onUpdate: () => {
+                display.textContent = `${prefix}${Math.round(obj.val)}${suffix}`;
+              },
+            });
+          }
+        }, { threshold: 0.3 });
+
+        observer.observe(el);
+      });
+
+      // ── Reveal on scroll ────────────
       const elements = document.querySelectorAll('.reveal');
       elements.forEach((el) => {
         gsap.fromTo(el, { opacity: 0, y: 30 }, {
@@ -348,8 +449,77 @@ const stats = [
         });
       });
 
-      // Timeline dots
-      gsap.fromTo('.timeline-dot', { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2)", stagger: 0.2, scrollTrigger: { trigger: '.timeline-dot', start: "top 85%" }});
+      // ── Timeline dots ────────────
+      const timelineDots = document.querySelectorAll('.timeline-dot');
+      if (timelineDots.length) {
+        gsap.fromTo(timelineDots, { scale: 0 }, {
+          scale: 1, duration: 0.4, ease: "back.out(2)", stagger: 0.2,
+          scrollTrigger: { trigger: timelineDots[0], start: "top 85%" }
+        });
+      }
+
+      // ── Project Filters ────────────
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectItems = document.querySelectorAll('#projects-grid > div');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+
+          // Update active button
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-accent', 'text-bg', 'border-accent');
+            b.classList.add('border-border', 'text-text-secondary');
+          });
+          btn.classList.add('bg-accent', 'text-bg', 'border-accent');
+          btn.classList.remove('border-border', 'text-text-secondary');
+
+          // Filter projects
+          projectItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              (item as HTMLElement).style.display = '';
+              gsap.fromTo(item, { opacity: 0, y: 15 }, {
+                opacity: 1, y: 0, duration: 0.3, ease: "power2.out"
+              });
+            } else {
+              (item as HTMLElement).style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // ── Stack Tabs ────────────
+      const stackTabs = document.querySelectorAll('.stack-tab');
+      const stackPanels = document.querySelectorAll('.stack-panel');
+
+      stackTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const targetId = tab.getAttribute('data-stack-tab');
+
+          // Update active tab
+          stackTabs.forEach(t => {
+            t.classList.remove('bg-accent', 'text-bg', 'border-accent');
+            t.classList.add('border-border', 'text-text-secondary');
+          });
+          tab.classList.add('bg-accent', 'text-bg', 'border-accent');
+          tab.classList.remove('border-border', 'text-text-secondary');
+
+          // Show target panel
+          stackPanels.forEach(panel => {
+            if (panel.getAttribute('data-stack-panel') === targetId) {
+              panel.classList.remove('hidden');
+              gsap.fromTo(panel.querySelectorAll('span'), {
+                opacity: 0, y: 10
+              }, {
+                opacity: 1, y: 0, duration: 0.2, stagger: 0.03, ease: "power2.out"
+              });
+            } else {
+              panel.classList.add('hidden');
+            }
+          });
+        });
+      });
     });
   </script>
 </Layout>

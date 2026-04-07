@@ -1,0 +1,30 @@
+---
+import { socialLinks } from '../data/social';
+---
+
+<footer class="border-t border-border">
+  <div class="max-w-[1100px] mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="text-center md:text-left">
+        <a href="/" class="font-sans font-bold text-text text-sm tracking-tight">
+          caio.<span class="text-accent">dev</span>
+        </a>
+        <p class="text-[11px] font-mono text-text-muted mt-1">
+          Feito com Astro · &copy; {new Date().getFullYear()}
+        </p>
+      </div>
+      <div class="flex items-center gap-4">
+        {socialLinks.map(social => (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-9 h-9 flex items-center justify-center border border-border text-text-muted hover:border-accent hover:text-accent transition-all duration-150"
+            aria-label={social.name}
+            set:html={social.svg}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</footer>

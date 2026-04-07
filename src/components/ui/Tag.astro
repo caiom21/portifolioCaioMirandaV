@@ -1,0 +1,19 @@
+---
+interface Props {
+  label: string;
+  variant?: 'default' | 'accent';
+}
+
+const { label, variant = 'default' } = Astro.props;
+---
+
+<span
+  class:list={[
+    "inline-block px-2.5 py-1 border text-[10px] font-mono font-medium uppercase tracking-[0.12em] transition-colors duration-150",
+    variant === 'accent'
+      ? "border-accent text-accent"
+      : "border-border text-text-secondary hover:border-border-bright hover:text-text"
+  ]}
+>
+  {label}
+</span>

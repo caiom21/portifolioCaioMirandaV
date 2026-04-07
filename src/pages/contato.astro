@@ -1,52 +1,58 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/caiom21', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.36 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.36 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/caio-miranda-dev', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>' },
-  { name: 'Instagram', href: 'https://www.instagram.com/caio.dev.pe/', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>' },
-];
+import SectionLabel from '../components/ui/SectionLabel.astro';
+import Footer from '../components/Footer.astro';
+import { socialLinks, contactInfo } from '../data/social';
 ---
-<Layout title="Contato | Caio Miranda">
-  <div class="relative w-full border-b border-accent/20">
+
+<Layout title="Contato | Caio Miranda" description="Entre em contato com Caio Miranda — desenvolvedor full-stack disponível para oportunidades remotas.">
+
+  <!-- Header -->
+  <div class="relative w-full border-b border-border">
     <div class="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
-    <div class="container mx-auto px-4 relative z-10">
+    <div class="max-w-[1100px] mx-auto px-6 relative z-10">
       <section class="py-16 md:py-24">
-        <h1 class="text-4xl md:text-5xl font-sans font-bold leading-tight tracking-tight mb-4 text-text">
+        <h1 class="text-4xl md:text-5xl font-display font-bold leading-tight tracking-tight mb-4 text-text">
           Sobre &amp; <span class="text-accent">Contato</span>
         </h1>
-        <p class="text-sm font-mono text-text/60 max-w-md leading-relaxed">
-          Vamos construir algo increvel.
+        <p class="text-sm font-mono text-text-secondary max-w-md leading-relaxed">
+          Vamos construir algo incrível.
         </p>
       </section>
     </div>
   </div>
 
-  <section class="container mx-auto px-4 py-24">
+  <!-- Content -->
+  <section class="max-w-[1100px] mx-auto px-6 py-24">
     <div class="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
 
+      <!-- Left: info -->
       <div class="reveal">
-        <div class="text-sm font-mono text-text/70 leading-relaxed space-y-6 mb-12">
-          <p>Sou um Desenvolvedor Full Stack apaixonado por arquiteturas elegantes, otimizacao de performance e automacao inteligente.</p>
-          <p>Analise e solucao de problemas atraves de codigo robusto, escalonavel e testes limpos.</p>
+        <div class="text-[15px] font-sans text-text-secondary leading-relaxed space-y-6 mb-12">
+          <p>Sou um Desenvolvedor Full Stack apaixonado por arquiteturas elegantes, otimização de performance e automação inteligente.</p>
+          <p>Análise e solução de problemas através de código robusto, escalável e testes limpos.</p>
         </div>
 
         <div class="flex flex-col gap-6">
-          <div class="border border-accent/20 bg-surface p-6 relative group hover:border-accent transition-colors">
-            <div class="card-corner hidden group-hover:block"></div>
-            <h3 class="text-xs font-mono tracking-widest text-accent mb-6 uppercase">Informacoes</h3>
-            <ul class="space-y-4 text-xs font-mono text-text/70">
+          <div class="border border-border bg-surface p-6 relative group hover:border-accent transition-colors">
+            <div class="card-corner opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <h3 class="font-mono text-[11px] tracking-[0.15em] text-accent mb-6 uppercase">Informações</h3>
+            <ul class="space-y-4 text-[12px] font-mono text-text-secondary">
               <li class="grid grid-cols-[100px_1fr]">
-                <span class="text-text/40">LOCAL</span>
-                <span>Brasil</span>
+                <span class="text-text-muted">LOCAL</span>
+                <span>{contactInfo.location}, Brasil</span>
               </li>
               <li class="grid grid-cols-[100px_1fr]">
-                <span class="text-text/40">EMAIL</span>
-                <a href="mailto:caiom2A@gmail.com" class="text-accent hover:underline underline-offset-4">caiom2A@gmail.com</a>
+                <span class="text-text-muted">EMAIL</span>
+                <a href={`mailto:${contactInfo.email}`} class="text-accent hover:underline underline-offset-4">{contactInfo.email}</a>
               </li>
               <li class="grid grid-cols-[100px_1fr]">
-                <span class="text-text/40">GITHUB</span>
+                <span class="text-text-muted">GITHUB</span>
                 <a href="https://github.com/caiom21" class="text-accent hover:underline underline-offset-4">/caiom21</a>
+              </li>
+              <li class="grid grid-cols-[100px_1fr]">
+                <span class="text-text-muted">TELEFONE</span>
+                <a href={contactInfo.whatsapp} class="text-accent hover:underline underline-offset-4">{contactInfo.phone}</a>
               </li>
             </ul>
           </div>
@@ -54,7 +60,7 @@ const socialLinks = [
           <div class="flex gap-3">
             {socialLinks.map(social => (
               <a href={social.href} target="_blank" rel="noopener noreferrer"
-                 class="w-10 h-10 flex items-center justify-center border border-text/20 text-text/50 hover:border-accent hover:text-accent transition-colors"
+                 class="w-10 h-10 flex items-center justify-center border border-border text-text-muted hover:border-accent hover:text-accent transition-all duration-150"
                  aria-label={social.name}
                  set:html={social.svg} />
             ))}
@@ -62,27 +68,28 @@ const socialLinks = [
         </div>
       </div>
 
+      <!-- Right: form -->
       <div class="reveal">
-        <form class="flex flex-col gap-6 bg-surface p-8 border border-accent/20 relative group hover:border-accent transition-colors">
-          <div class="card-corner hidden group-hover:block"></div>
-          <h2 class="text-xs font-mono tracking-widest text-accent mb-2 uppercase">Nova Mensagem</h2>
+        <form class="flex flex-col gap-6 bg-surface p-8 border border-border relative group hover:border-accent transition-colors">
+          <div class="card-corner opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <h2 class="font-mono text-[11px] tracking-[0.15em] text-accent mb-2 uppercase">Nova Mensagem</h2>
 
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] font-mono tracking-widest text-text/60 uppercase">Nome</label>
-            <input type="text" class="px-4 py-3 border border-accent/20 text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors" required />
+            <label class="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">Nome</label>
+            <input type="text" class="px-4 py-3 border border-border text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors" required />
           </div>
 
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] font-mono tracking-widest text-text/60 uppercase">Email</label>
-            <input type="email" class="px-4 py-3 border border-accent/20 text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors" required />
+            <label class="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">Email</label>
+            <input type="email" class="px-4 py-3 border border-border text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors" required />
           </div>
 
           <div class="flex flex-col gap-2">
-            <label class="text-[10px] font-mono tracking-widest text-text/60 uppercase">Mensagem</label>
-            <textarea rows="4" class="px-4 py-3 border border-accent/20 text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors resize-none" required></textarea>
+            <label class="text-[10px] font-mono tracking-[0.15em] text-text-muted uppercase">Mensagem</label>
+            <textarea rows="4" class="px-4 py-3 border border-border text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors resize-none" required></textarea>
           </div>
 
-          <button type="submit" class="mt-4 py-3 bg-text text-bg text-xs font-mono tracking-widest uppercase hover:bg-accent transition-colors">
+          <button type="submit" class="mt-4 py-3 bg-accent text-bg text-[11px] font-mono tracking-[0.15em] uppercase hover:bg-accent-hover transition-colors cursor-pointer">
             Enviar Mensagem
           </button>
         </form>
@@ -90,19 +97,7 @@ const socialLinks = [
     </div>
   </section>
 
-  <footer class="container mx-auto px-4 py-12 border-t border-accent/20">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <p class="text-xs font-mono text-text/40">&copy; 2026 Caio Miranda. Todos os direitos reservados.</p>
-      <div class="flex items-center gap-4">
-        {socialLinks.map(social => (
-          <a href={social.href} target="_blank" rel="noopener noreferrer"
-             class="w-8 h-8 flex items-center justify-center text-text/30 hover:text-accent transition-colors"
-             aria-label={social.name}
-             set:html={social.svg} />
-        ))}
-      </div>
-    </div>
-  </footer>
+  <Footer />
 
   <script>
     import { gsap } from "gsap";
@@ -114,15 +109,8 @@ const socialLinks = [
       const elements = document.querySelectorAll('.reveal');
       elements.forEach((el) => {
         gsap.fromTo(el, { opacity: 0, y: 20 }, {
-          scrollTrigger: {
-            trigger: el,
-            start: "top 95%",
-          },
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power2.out",
-          clearProps: "all"
+          scrollTrigger: { trigger: el, start: "top 95%" },
+          y: 0, opacity: 1, duration: 0.8, ease: "power2.out", clearProps: "all"
         });
       });
     });

@@ -1,0 +1,28 @@
+---
+import type { Stat } from '../../data/stats';
+
+interface Props {
+  stat: Stat;
+  index: number;
+}
+
+const { stat, index } = Astro.props;
+---
+
+<div
+  class="bg-bg p-6 flex flex-col gap-2 hover:bg-surface transition-colors duration-200 reveal stat-card"
+  data-delay={index * 0.05}
+>
+  <div
+    class="font-mono font-bold text-accent stat-number"
+    style="font-size: clamp(32px, 4vw, 48px);"
+    data-target={stat.value}
+    data-suffix={stat.suffix}
+    data-prefix={stat.prefix}
+  >
+    <span class="stat-display">{stat.prefix}0{stat.suffix}</span>
+  </div>
+  <p class="font-mono text-[11px] uppercase tracking-wide text-text-secondary leading-tight">
+    {stat.label}
+  </p>
+</div>

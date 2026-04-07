@@ -1,48 +1,123 @@
 ---
 const links = [
   { name: 'INÍCIO', href: '/' },
-  { name: 'PROJETOS', href: '/projetos' },
+  { name: 'PROJETOS', href: '/#projetos' },
   { name: 'STACK', href: '/#stack' },
-  { name: 'CONTATO', href: '/contato' },
+  { name: 'SOBRE', href: '/#sobre' },
+  { name: 'CONTATO', href: '/#contato' },
 ];
 ---
-<nav class="w-full bg-bg border-b border-accent/20 sticky top-0 z-50 transition-colors duration-300">
-  <div class="container mx-auto px-4 h-16 flex items-center justify-between font-mono text-sm">
-    <a href="/" class="font-bold tracking-tight text-text text-lg">
+
+<nav class="w-full sticky top-0 z-50 transition-all duration-300 border-b border-border" id="main-nav">
+  <div class="absolute inset-0 bg-bg/80 backdrop-blur-md"></div>
+  <div class="max-w-[1100px] mx-auto px-6 h-16 flex items-center justify-between font-mono text-sm relative z-10">
+    <a href="/" class="font-sans font-bold tracking-tight text-text text-lg">
       caio.<span class="text-accent">dev</span>
     </a>
-    <div class="hidden md:flex gap-8 items-center">
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex gap-6 items-center">
       {links.map((link) => (
-        <a href={link.href} class="text-text/70 hover:text-accent transition-colors py-5 border-b-[3px] border-transparent hover:border-accent">
+        <a
+          href={link.href}
+          class="text-text-secondary hover:text-accent transition-colors py-5 text-[11px] uppercase tracking-[0.1em] relative
+                 after:absolute after:bottom-3 after:left-0 after:w-0 after:h-px after:bg-accent after:transition-all after:duration-200
+                 hover:after:w-full"
+        >
           {link.name}
         </a>
       ))}
+
+      <div class="flex items-center gap-3 ml-2">
+        <div class="pulsing-dot"></div>
+        <button
+          id="theme-toggle"
+          class="px-3 py-1 border border-border text-text-secondary text-[10px] uppercase tracking-wider
+                 hover:border-accent hover:text-accent transition-all duration-150 cursor-pointer"
+          aria-label="Alternar tema"
+        >
+          DARK
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav toggle -->
+    <div class="md:hidden flex items-center gap-3">
       <div class="pulsing-dot"></div>
-      
-      <button id="theme-toggle" class="ml-4 px-3 py-1 border border-accent text-accent text-xs hover:bg-accent hover:text-bg transition-colors cursor-pointer" aria-label="Toggle dark mode">
-        LIGHT
+      <button
+        id="mobile-menu-btn"
+        class="text-[11px] font-mono text-text-secondary uppercase tracking-wider hover:text-accent transition-colors cursor-pointer"
+        aria-label="Menu"
+      >
+        MENU
       </button>
     </div>
-    <div class="md:hidden flex items-center gap-4">
-      <div class="pulsing-dot"></div>
-      <button class="text-xs font-mono text-text/70 uppercase hover:text-accent">Menu</button>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div id="mobile-menu" class="hidden md:hidden fixed inset-0 top-16 bg-bg/95 backdrop-blur-lg z-40">
+    <div class="flex flex-col items-center justify-center h-full gap-8">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="mobile-nav-link text-text text-lg font-mono uppercase tracking-[0.15em] hover:text-accent transition-colors"
+        >
+          {link.name}
+        </a>
+      ))}
+      <div class="pt-4 border-t border-border w-32 flex justify-center">
+        <button
+          id="theme-toggle-mobile"
+          class="px-4 py-2 border border-border text-text-secondary text-[10px] uppercase tracking-wider
+                 hover:border-accent hover:text-accent transition-all duration-150 cursor-pointer"
+          aria-label="Alternar tema"
+        >
+          DARK
+        </button>
+      </div>
     </div>
   </div>
 </nav>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const toggleBtn = document.getElementById('theme-toggle');
-    if (toggleBtn) {
-      const updateBtnText = () => {
-        toggleBtn.innerText = document.documentElement.classList.contains('dark') ? 'LIGHT' : 'DARK';
-      };
-      updateBtnText();
-      
-      toggleBtn.addEventListener('click', () => {
+    // Theme toggle
+    const toggleBtns = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-mobile'),
+    ].filter(Boolean) as HTMLButtonElement[];
+
+    const updateBtnText = () => {
+      const label = document.documentElement.classList.contains('dark') ? 'LIGHT' : 'DARK';
+      toggleBtns.forEach(btn => { btn.innerText = label; });
+    };
+    updateBtnText();
+
+    toggleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateBtnText();
+      });
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        menuBtn.innerText = isOpen ? 'MENU' : 'FECHAR';
+      });
+
+      // Close on link click
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuBtn.innerText = 'MENU';
+        });
       });
     }
   });
