@@ -13,15 +13,15 @@ const projetos = [
   {
     type: 'BOT . PYTHON',
     title: 'Bot Trader',
-    description: 'Trading algorítmico com estratégias quantitativas. Paper trading 24/7 na Kraken.',
+    description: 'Trading algoritmico com estrategias quantitativas. Paper trading 24/7 na Kraken.',
     tags: ['PYTHON', 'FREQTRADE', 'DOCKER', 'TA-LIB'],
     link: '#',
     repo: 'https://github.com/caiom21/bot-trader'
   },
   {
     type: 'PIPELINE . IA',
-    title: 'Pipeline de Conteúdo com IA',
-    description: 'Automação de criação e publicação de reels com inteligência artificial.',
+    title: 'Pipeline de Conteudo com IA',
+    description: 'Automacao de criacao e publicacao de reels com inteligencia artificial.',
     tags: ['PYTHON', 'N8N', 'API', 'IA'],
     link: '#',
     repo: 'https://github.com/caiom21/reels_pipeline'
@@ -43,6 +43,12 @@ const projetos = [
     repo: 'https://github.com/caiom21/Upper-cut-barbearia'
   }
 ];
+
+const socialLinks = [
+  { name: 'GitHub', href: 'https://github.com/caiom21', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.36 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.36 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/caio-miranda-dev', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>' },
+  { name: 'Instagram', href: 'https://www.instagram.com/caio.dev.pe/', svg: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>' },
+];
 ---
 <Layout title="Projetos | Caio Miranda">
   <div class="relative w-full border-b border-accent/20">
@@ -60,32 +66,47 @@ const projetos = [
   </div>
 
   <section class="container mx-auto px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-6">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projetos.map(proj => (
         <div class="relative bg-surface border border-accent/20 p-8 group hover:border-accent transition-colors reveal flex flex-col">
           <div class="card-corner opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div class="text-[10px] font-mono tracking-widest text-text/40 mb-3 uppercase">{proj.type}</div>
           <h3 class="text-xl font-bold mb-3 text-text">{proj.title}</h3>
-          <p class="text-sm font-mono text-text/60 mb-8 flex-grow">{proj.description}</p>
+          <p class="text-sm font-mono text-text/60 mb-6 flex-grow">{proj.description}</p>
 
-          <div class="flex flex-wrap gap-2 mb-8">
+          <div class="flex flex-wrap gap-2 mb-6">
             {proj.tags.map(tag => (
               <span class="px-2 py-1 border border-accent/30 text-accent text-[10px] font-mono tracking-wider">{tag}</span>
             ))}
           </div>
 
-          <div class="flex gap-4">
+          <div class="flex gap-4 mt-auto">
             <a href={proj.link} target="_blank" class="text-xs font-mono tracking-widest text-accent hover:underline underline-offset-4">
               VISUALIZAR
             </a>
             <a href={proj.repo} target="_blank" class="text-xs font-mono tracking-widest text-text/40 hover:text-text hover:underline underline-offset-4 transition-colors">
-              CÓDIGO-FONTE
+              CODIGO-FONTE
             </a>
           </div>
         </div>
       ))}
     </div>
   </section>
+
+  <footer class="container mx-auto px-4 py-12 border-t border-accent/20">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <p class="text-xs font-mono text-text/40">&copy; 2026 Caio Miranda. Todos os direitos reservados.</p>
+      <div class="flex items-center gap-4">
+        {socialLinks.map(social => (
+          <a href={social.href} target="_blank" rel="noopener noreferrer"
+             class="w-8 h-8 flex items-center justify-center text-text/30 hover:text-accent transition-colors"
+             aria-label={social.name}
+             set:html={social.svg} />
+        ))}
+      </div>
+    </div>
+  </footer>
+
   <script>
     import { gsap } from "gsap";
     import { ScrollTrigger } from "gsap/ScrollTrigger";
