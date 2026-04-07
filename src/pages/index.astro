@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projetos = [
+  {
+    type: 'BOT . PYTHON',
+    title: 'Bot Trader',
+    description: '17 versões de estratégias quantitativas. Deploy containerizado, paper trading 24/7 na Kraken.',
+    tags: ['PYTHON', 'FREQTRADE', 'DOCKER', 'TA-LIB'],
+    repo: 'https://github.com/caiom21/bot-trader'
+  },
+  {
+    type: 'WEB . REACT',
+    title: 'Ponto Cruz E-commerce',
+    description: 'Loja de artesanatos e bordados com foco em performance e acessibilidade.',
+    tags: ['REACT', 'NODE.JS', 'TAILWIND'],
+    repo: 'https://github.com/caiom21/ponto-cruz-ecommerce'
+  }
+];
+
+const stack = [
+  'REACT', 'TYPESCRIPT', 'NODE.JS', 'NEXT.JS', 'VUE.JS', 'PYTHON', 'DOCKER', 'FIGMA', 'N8N', 'POSTGRESQL', 'TAILWIND', 'REACT NATIVE'
+];
+---
+
+<Layout title="Caio Miranda | Full Stack Developer">
+  <div class="relative w-full border-b border-accent/20">
+    <div class="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <section class="py-24 md:py-32">
+        <div class="flex flex-col-reverse md:flex-row gap-12 items-center md:items-start justify-between">
+          <div class="flex-1">
+            <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-accent mb-6 uppercase hero-tag">
+              <div class="w-8 h-[1px] bg-accent"></div>
+              FULL-STACK DEVELOPER
+            </div>
+            <h1 class="text-5xl md:text-7xl font-sans font-bold leading-tight tracking-tight mb-6 text-text hero-name">
+              Caio<br/>
+              <span class="text-accent hover:text-accent-hover transition-colors">Miranda</span>
+            </h1>
+            <p class="text-sm font-mono text-text/60 max-w-md leading-relaxed mb-8 hero-desc">
+              React · Node.js · TypeScript · IA & Automação<br/>
+              Bezerros, PE — disponível para remoto
+            </p>
+            <div class="flex flex-wrap gap-4 hero-actions">
+              <a href="#projetos" class="px-6 py-3 border border-accent text-accent hover:bg-accent hover:text-bg transition-colors font-mono text-sm uppercase">Ver Projetos</a>
+              <a href="/cv.pdf" target="_blank" class="px-6 py-3 border border-text/20 text-text/80 hover:border-text hover:text-text transition-colors font-mono text-sm uppercase">Download CV</a>
+            </div>
+          </div>
+          
+          <div class="w-48 h-48 md:w-64 md:h-64 relative group border border-accent/20 hover:border-accent transition-colors flex-shrink-0 overflow-hidden hero-actions">
+            <div class="card-corner hidden md:block z-20"></div>
+            <img src="/fotoPerfil.jpg" alt="Caio Miranda" class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 z-10 relative" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyMjIiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMxMTEiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNHB4IiBmaWxsPSI1NTUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZvdG8gUGVyZmlsPC90ZXh0Pjwvc3ZnPg=='" />
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section id="projetos" class="container mx-auto px-4 py-16 border-b border-accent/20">
+    <h2 class="text-xs font-mono tracking-widest text-accent mb-8 uppercase">Projeto em destaque</h2>
+    <div class="flex flex-col gap-6">
+      {projetos.map(proj => (
+        <div class="relative bg-surface border border-accent/20 p-8 group hover:border-accent transition-colors reveal">
+          <div class="card-corner opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="text-[10px] font-mono tracking-widest text-text/40 mb-3 uppercase">{proj.type}</div>
+          <h3 class="text-xl font-bold mb-3 text-text">{proj.title}</h3>
+          <p class="text-sm font-mono text-text/60 mb-6 max-w-2xl">{proj.description}</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            {proj.tags.map(tag => (
+              <span class="px-2 py-1 border border-accent/30 text-accent text-[10px] font-mono tracking-wider">{tag}</span>
+            ))}
+          </div>
+          <a href={proj.repo} target="_blank" class="text-xs font-mono tracking-widest text-accent hover:underline underline-offset-4">
+            CÓDIGO-FONTE
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="stack" class="container mx-auto px-4 py-16 border-b border-accent/20">
+    <h2 class="text-xs font-mono tracking-widest text-accent mb-8 uppercase">Stack Principal</h2>
+    <div class="flex flex-wrap gap-3">
+      {stack.map(tech => (
+        <span class="px-4 py-2 border border-accent/20 bg-surface text-xs font-mono tracking-wider text-text/60 hover:border-accent hover:text-accent transition-colors cursor-default reveal">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    
+    document.addEventListener('astro:page-load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      const elements = document.querySelectorAll('.reveal');
+      elements.forEach((el) => {
+        gsap.fromTo(el, { opacity: 0, y: 20 }, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          clearProps: "all"
+        });
+      });
+
+      // Simple Hero Entrance
+      gsap.fromTo('.hero-name', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" });
+      gsap.fromTo('.hero-tag, .hero-desc, .hero-actions', 
+        { opacity: 0, y: 15 }, 
+        { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out", delay: 0.2 }
+      );
+    });
+  </script>
+</Layout>

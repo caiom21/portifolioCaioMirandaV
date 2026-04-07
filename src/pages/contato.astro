@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Contato | Caio Miranda">
+  <div class="relative w-full border-b border-accent/20">
+    <div class="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <section class="py-16 md:py-24">
+        <h1 class="text-4xl md:text-5xl font-sans font-bold leading-tight tracking-tight mb-4 text-text">
+          Sobre & <span class="text-accent">Contato</span>
+        </h1>
+        <p class="text-sm font-mono text-text/60 max-w-md leading-relaxed">
+          Vamos construir algo incrível.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div class="space-y-8 reveal">
+        <div class="text-sm font-mono text-text/70 leading-relaxed space-y-6">
+          <p>
+            Sou um Desenvolvedor Full Stack apaixonado por arquiteturas elegantes, otimização de performance e automação inteligente.
+          </p>
+          <p>
+            Análise e solução de problemas através de código robusto, escalonável e testes limpos.
+          </p>
+        </div>
+        
+        <div class="border border-accent/20 bg-surface p-6 relative group hover:border-accent transition-colors">
+          <div class="card-corner hidden group-hover:block"></div>
+          <h3 class="text-xs font-mono tracking-widest text-accent mb-6 uppercase">Informações</h3>
+          <ul class="space-y-4 text-xs font-mono text-text/70">
+            <li class="grid grid-cols-[100px_1fr]">
+              <span class="text-text/40">LOCAL</span> 
+              <span>Brasil</span>
+            </li>
+            <li class="grid grid-cols-[100px_1fr]">
+              <span class="text-text/40">EMAIL</span> 
+              <span class="text-text">caiom2A@gmail.com</span>
+            </li>
+            <li class="grid grid-cols-[100px_1fr]">
+              <span class="text-text/40">GITHUB</span> 
+              <a href="https://github.com/caiom21" class="text-accent hover:underline underline-offset-4">/caiom21</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <form class="flex flex-col gap-6 bg-surface p-8 border border-accent/20 relative group hover:border-accent transition-colors">
+          <div class="card-corner hidden group-hover:block"></div>
+          <h2 class="text-xs font-mono tracking-widest text-accent mb-2 uppercase">Nova Mensagem</h2>
+          
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] font-mono tracking-widest text-text/60 uppercase">Nome</label>
+            <input type="text" class="px-4 py-3 border border-accent/20 text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors" required />
+          </div>
+          
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] font-mono tracking-widest text-text/60 uppercase">Email</label>
+            <input type="email" class="px-4 py-3 border border-accent/20 text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors" required />
+          </div>
+          
+          <div class="flex flex-col gap-2">
+            <label class="text-[10px] font-mono tracking-widest text-text/60 uppercase">Mensagem</label>
+            <textarea rows="4" class="px-4 py-3 border border-accent/20 text-sm font-mono bg-transparent text-text focus:outline-none focus:border-accent transition-colors resize-none" required></textarea>
+          </div>
+          
+          <button type="submit" class="mt-4 py-3 bg-text text-bg text-xs font-mono tracking-widest uppercase hover:bg-accent transition-colors">
+            Enviar Mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    
+    document.addEventListener('astro:page-load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+      
+      const elements = document.querySelectorAll('.reveal');
+      elements.forEach((el) => {
+        gsap.fromTo(el, { opacity: 0, y: 20 }, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          clearProps: "all"
+        });
+      });
+    });
+  </script>
+</Layout>

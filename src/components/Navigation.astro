@@ -1,0 +1,49 @@
+---
+const links = [
+  { name: 'INÍCIO', href: '/' },
+  { name: 'PROJETOS', href: '/projetos' },
+  { name: 'STACK', href: '/#stack' },
+  { name: 'CONTATO', href: '/contato' },
+];
+---
+<nav class="w-full bg-bg border-b border-accent/20 sticky top-0 z-50 transition-colors duration-300">
+  <div class="container mx-auto px-4 h-16 flex items-center justify-between font-mono text-sm">
+    <a href="/" class="font-bold tracking-tight text-text text-lg">
+      caio.<span class="text-accent">dev</span>
+    </a>
+    <div class="hidden md:flex gap-8 items-center">
+      {links.map((link) => (
+        <a href={link.href} class="text-text/70 hover:text-accent transition-colors py-5 border-b-[3px] border-transparent hover:border-accent">
+          {link.name}
+        </a>
+      ))}
+      <div class="pulsing-dot"></div>
+      
+      <button id="theme-toggle" class="ml-4 px-3 py-1 border border-accent text-accent text-xs hover:bg-accent hover:text-bg transition-colors cursor-pointer" aria-label="Toggle dark mode">
+        LIGHT
+      </button>
+    </div>
+    <div class="md:hidden flex items-center gap-4">
+      <div class="pulsing-dot"></div>
+      <button class="text-xs font-mono text-text/70 uppercase hover:text-accent">Menu</button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (toggleBtn) {
+      const updateBtnText = () => {
+        toggleBtn.innerText = document.documentElement.classList.contains('dark') ? 'LIGHT' : 'DARK';
+      };
+      updateBtnText();
+      
+      toggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateBtnText();
+      });
+    }
+  });
+</script>

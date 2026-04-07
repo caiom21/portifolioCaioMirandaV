@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projetos = [
+  {
+    type: 'WEB . REACT',
+    title: 'AppGymCm',
+    description: 'Aplicativo para gerenciamento de academia.',
+    tags: ['REACT', 'TYPESCRIPT', 'TAILWIND'],
+    link: '#',
+    repo: 'https://github.com/caiom21/AppGymCM'
+  },
+  {
+    type: 'BOT . PYTHON',
+    title: 'Bot Trader',
+    description: 'Trading algorítmico com estratégias quantitativas. Paper trading 24/7 na Kraken.',
+    tags: ['PYTHON', 'FREQTRADE', 'DOCKER', 'TA-LIB'],
+    link: '#',
+    repo: 'https://github.com/caiom21/bot-trader'
+  },
+  {
+    type: 'PIPELINE . IA',
+    title: 'Pipeline de Conteúdo com IA',
+    description: 'Automação de criação e publicação de reels com inteligência artificial.',
+    tags: ['PYTHON', 'N8N', 'API', 'IA'],
+    link: '#',
+    repo: 'https://github.com/caiom21/reels_pipeline'
+  },
+  {
+    type: 'WEB . REACT',
+    title: 'Ponto Cruz E-commerce',
+    description: 'Loja de artesanatos e bordados com foco em performance e acessibilidade.',
+    tags: ['REACT', 'NODE.JS', 'TAILWIND'],
+    link: '#',
+    repo: 'https://github.com/caiom21/ponto-cruz-ecommerce'
+  },
+  {
+    type: 'WEB . NEXT.JS',
+    title: 'Upper Cut Barbearia',
+    description: 'Site institucional para barbearia com sistema de agendamento.',
+    tags: ['NEXT.JS', 'TYPESCRIPT', 'TAILWIND'],
+    link: '#',
+    repo: 'https://github.com/caiom21/Upper-cut-barbearia'
+  }
+];
+---
+<Layout title="Projetos | Caio Miranda">
+  <div class="relative w-full border-b border-accent/20">
+    <div class="absolute inset-0 bg-grid z-0 pointer-events-none"></div>
+    <div class="container mx-auto px-4 relative z-10">
+      <section class="py-16 md:py-24">
+        <h1 class="text-4xl md:text-5xl font-sans font-bold leading-tight tracking-tight mb-4 text-text">
+          Todos os <span class="text-accent">Projetos</span>
+        </h1>
+        <p class="text-sm font-mono text-text/60 max-w-md leading-relaxed">
+          Lista completa de sistemas, bots e interfaces.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <section class="container mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 gap-6">
+      {projetos.map(proj => (
+        <div class="relative bg-surface border border-accent/20 p-8 group hover:border-accent transition-colors reveal flex flex-col">
+          <div class="card-corner opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="text-[10px] font-mono tracking-widest text-text/40 mb-3 uppercase">{proj.type}</div>
+          <h3 class="text-xl font-bold mb-3 text-text">{proj.title}</h3>
+          <p class="text-sm font-mono text-text/60 mb-8 flex-grow">{proj.description}</p>
+
+          <div class="flex flex-wrap gap-2 mb-8">
+            {proj.tags.map(tag => (
+              <span class="px-2 py-1 border border-accent/30 text-accent text-[10px] font-mono tracking-wider">{tag}</span>
+            ))}
+          </div>
+
+          <div class="flex gap-4">
+            <a href={proj.link} target="_blank" class="text-xs font-mono tracking-widest text-accent hover:underline underline-offset-4">
+              VISUALIZAR
+            </a>
+            <a href={proj.repo} target="_blank" class="text-xs font-mono tracking-widest text-text/40 hover:text-text hover:underline underline-offset-4 transition-colors">
+              CÓDIGO-FONTE
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    document.addEventListener('astro:page-load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      const elements = document.querySelectorAll('.reveal');
+      elements.forEach((el) => {
+        gsap.fromTo(el, { opacity: 0, y: 20 }, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+          },
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          clearProps: "all"
+        });
+      });
+    });
+  </script>
+</Layout>

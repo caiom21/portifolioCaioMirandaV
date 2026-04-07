@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--theme-bg);
+  --color-surface: var(--theme-surface);
+  --color-accent: var(--theme-accent);
+  --color-accent-hover: var(--theme-accent-hover);
+  --color-text: var(--theme-text);
+  --font-sans: 'Space Mono', 'Courier New', monospace;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+@layer base {
+  :root {
+    --theme-bg: #f8f8f6;
+    --theme-surface: #ffffff;
+    --theme-accent: #1a7a3f;
+    --theme-accent-hover: #22a852;
+    --theme-text: #111111;
+    --theme-grid: #5fff97;
+  }
+
+  .dark {
+    --theme-bg: #0a0a0a;
+    --theme-surface: #111111;
+    --theme-accent: #e8192c;
+    --theme-accent-hover: #ff3347;
+    --theme-text: #f0f0f0;
+    --theme-grid: #5a151c;
+  }
+}
+
+body {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+::selection {
+  background-color: var(--theme-accent);
+  color: #fff;
+}
+
+.bg-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, var(--theme-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--theme-grid) 1px, transparent 1px);
+}
+
+.card-corner {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 18px;
+  height: 18px;
+  border-top: 2px solid var(--theme-accent);
+  border-right: 2px solid var(--theme-accent);
+  transition: width 250ms ease, height 250ms ease;
+}
+
+.group:hover .card-corner {
+  width: 28px;
+  height: 28px;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+.pulsing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--theme-accent);
+  animation: pulse-dot 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--theme-surface);
+  border: 1px solid var(--theme-accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--theme-accent);
+}
